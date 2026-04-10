@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Biblique & Culture Générale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      sizes="32x32"
+      href="assets/favicon-32.svg"
+    />
+    <link rel="shortcut icon" href="assets/favicon.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.svg"
+    />
+    <link rel="manifest" href="assets/site.webmanifest" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="bg-shapes" aria-hidden="true">
+      <span class="shape shape-a"></span>
+      <span class="shape shape-b"></span>
+      <span class="shape shape-c"></span>
+    </div>
+
+    <main class="app" role="main">
+      <header class="app-header">
+        <div class="brand-wrap">
+          <img
+            src="assets/logo.svg"
+            alt="Logo M.G.N CodeWave"
+            class="brand-logo"
+            width="96"
+            height="96"
+            loading="eager"
+            decoding="async"
+          />
+          <div>
+            <h1>Quiz Biblique & Culture Générale</h1>
+            <p class="tagline">Un mini-jeu rapide, clair et 100% en local.</p>
+          </div>
+        </div>
+        <div class="header-tools" aria-label="Preferences">
+          <div>
+            <label for="languageSelect" id="languageLabel">Langue</label>
+            <select id="languageSelect" name="languageSelect">
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
+          <div>
+            <label for="themeSelect" id="themeLabel">Theme</label>
+            <select id="themeSelect" name="themeSelect">
+              <option value="light">Clair</option>
+              <option value="dark">Sombre</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <section class="card rules" aria-labelledby="rules-title">
+        <h2 id="rules-title">Règles</h2>
+        <ul id="rulesList">
+          <li id="rule1">
+            Entrez votre nom puis cliquez sur <strong>Commencer</strong>.
+          </li>
+          <li>
+            <span id="rule2"
+              >Vous répondez à un nombre de questions défini par la
+              difficulté.</span
+            >
+          </li>
+          <li id="rule3">Chaque bonne réponse vaut 1 point.</li>
+          <li>
+            <span id="rule4"
+              >Le minuteur par question est réglé automatiquement par
+              difficulté.</span
+            >
+          </li>
+          <li id="rule5">
+            Les questions sont mélangées à chaque nouvelle partie.
+          </li>
+          <li>
+            <span id="rule6"
+              >Le mode 2 joueurs local alterne les tours question par
+              question.</span
+            >
+          </li>
+          <li id="rule7">Le score et votre nom s'affichent en temps réel.</li>
+          <li>
+            <span id="rule8"
+              >À la fin, cliquez sur <strong>Rejouer</strong> pour une nouvelle
+              partie sans recharger la page.</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section class="card setup" aria-label="Configuration joueur">
+        <div class="setup-grid">
+          <div>
+            <label for="playerName">Nom joueur 1</label>
+            <input
+              type="text"
+              id="playerName"
+              name="playerName"
+              maxlength="24"
+              placeholder="Ex: Ruth"
+              autocomplete="off"
+            />
+          </div>
+          <div>
+            <label for="playerTwoName">Nom joueur 2</label>
+            <input
+              type="text"
+              id="playerTwoName"
+              name="playerTwoName"
+              maxlength="24"
+              placeholder="Ex: Daniel"
+              autocomplete="off"
+            />
+          </div>
+          <div>
+            <label for="timePerQuestion">Secondes par question</label>
+            <input
+              type="number"
+              id="timePerQuestion"
+              name="timePerQuestion"
+              min="5"
+              max="60"
+              value="15"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="difficultyLevel">Difficulté</label>
+            <select id="difficultyLevel" name="difficultyLevel">
+              <option value="easy">Facile</option>
+              <option value="medium">Moyen</option>
+              <option value="hard">Difficile</option>
+            </select>
+          </div>
+          <div>
+            <label for="questionCountMode" id="questionCountModeLabel"
+              >Mode de questions</label
+            >
+            <select id="questionCountMode" name="questionCountMode">
+              <option value="auto">Automatique (selon difficulté)</option>
+              <option value="custom">Personnalisé</option>
+            </select>
+          </div>
+          <div>
+            <label for="customQuestionCount" id="customQuestionCountLabel"
+              >Nombre personnalisé</label
+            >
+            <select
+              id="customQuestionCount"
+              name="customQuestionCount"
+              disabled
+            >
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+          <div class="mode-toggle">
+            <input type="checkbox" id="twoPlayerMode" name="twoPlayerMode" />
+            <label for="twoPlayerMode">Activer le mode 2 joueurs local</label>
+          </div>
+        </div>
+        <div class="setup-row">
+          <button id="startBtn" type="button">Commencer</button>
+        </div>
+        <p class="live">
+          <span id="livePrefix">Participant en direct:</span>
+          <span id="liveName">Invité</span>
+        </p>
+        <p class="live" id="difficultyInfo">
+          Facile: 20s, 40 questions (niveau introductif)
+        </p>
+      </section>
+
+      <section class="card status" aria-label="Statut de partie">
+        <p>
+          <span id="statePrefix">État du jeu:</span>
+          <strong id="gameStateLabel">Début</strong>
+        </p>
+        <p>
+          <span id="turnPrefix">Tour actuel:</span>
+          <strong id="currentPlayerLabel">-</strong>
+        </p>
+        <p>
+          <span id="timePrefix">Temps restant:</span>
+          <strong id="timerLabel">0s</strong>
+        </p>
+        <p>
+          <span id="difficultyPrefix">Difficulté:</span>
+          <strong id="difficultyLabel">Facile</strong>
+        </p>
+        <p>
+          <span id="scorePrefix">Score:</span>
+          <strong id="scoreLabel">0</strong>
+        </p>
+        <p>
+          <span id="scoreboardPrefix">Scores joueurs:</span>
+          <strong id="scoreboardLabel">J1 0 - J2 0</strong>
+        </p>
+        <p>
+          <span id="questionPrefix">Question:</span>
+          <strong id="progressLabel">0 / 0</strong>
+        </p>
+      </section>
+
+      <section class="card quiz" aria-live="polite" aria-label="Zone du quiz">
+        <h2 id="questionText">Cliquez sur Commencer pour lancer la partie</h2>
+        <div id="answers" class="answers" role="list"></div>
+      </section>
+
+      <section class="card controls">
+        <button id="nextBtn" type="button" disabled>Question suivante</button>
+        <button id="replayBtn" type="button" disabled>Rejouer</button>
+      </section>
+
+      <section class="card result" id="resultBox" aria-live="polite">
+        <h2>Résultat</h2>
+        <p id="resultText">Aucune partie terminée pour le moment.</p>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>
+        Conçu par
+        <a
+          href="https://code-wave-eight.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >M.G.N CodeWave</a
+        >
+      </p>
+    </footer>
+
+    <script type="module" src="js/game.js"></script>
+  </body>
+</html>
