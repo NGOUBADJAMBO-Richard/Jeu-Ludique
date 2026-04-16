@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Biblique & Culture Générale</title>
+    <title>Quiz Culture Generale</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -46,8 +46,10 @@
             decoding="async"
           />
           <div>
-            <h1>Quiz Biblique & Culture Générale</h1>
-            <p class="tagline">Un mini-jeu rapide, clair et 100% en local.</p>
+            <h1>Quiz Culture Generale</h1>
+            <p class="tagline">
+              1000 questions aleatoires, rapide et 100% local.
+            </p>
           </div>
         </div>
         <div class="header-tools" aria-label="Preferences">
@@ -151,6 +153,20 @@
             </select>
           </div>
           <div>
+            <label for="questionTheme">Theme des questions</label>
+            <select id="questionTheme" name="questionTheme">
+              <option value="all">Tous</option>
+              <option value="geography">Geographie</option>
+              <option value="history">Histoire</option>
+              <option value="science">Sciences</option>
+              <option value="arts">Arts et litterature</option>
+              <option value="sports">Sports</option>
+              <option value="bible">Bible</option>
+              <option value="technology">Technologie</option>
+              <option value="civics">Institutions et citoyennete</option>
+            </select>
+          </div>
+          <div>
             <label for="questionCountMode" id="questionCountModeLabel"
               >Mode de questions</label
             >
@@ -186,7 +202,7 @@
           <span id="liveName">Invité</span>
         </p>
         <p class="live" id="difficultyInfo">
-          Facile: 20s, 40 questions (niveau introductif)
+          Facile: 20s, 400 questions (niveau introductif)
         </p>
       </section>
 

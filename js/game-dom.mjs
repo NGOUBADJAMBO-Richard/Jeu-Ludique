@@ -21,6 +21,7 @@ export function getDomRefs() {
     twoPlayerModeInput: document.getElementById("twoPlayerMode"),
     timePerQuestionInput: document.getElementById("timePerQuestion"),
     difficultyLevelInput: document.getElementById("difficultyLevel"),
+    questionThemeInput: document.getElementById("questionTheme"),
     questionCountModeInput: document.getElementById("questionCountMode"),
     customQuestionCountInput: document.getElementById("customQuestionCount"),
     playerOneLabel: document.querySelector('label[for="playerName"]'),
@@ -31,6 +32,7 @@ export function getDomRefs() {
     difficultyLevelSetupLabel: document.querySelector(
       'label[for="difficultyLevel"]',
     ),
+    questionThemeLabel: document.querySelector('label[for="questionTheme"]'),
     questionCountModeLabel: document.getElementById("questionCountModeLabel"),
     customQuestionCountLabel: document.getElementById(
       "customQuestionCountLabel",

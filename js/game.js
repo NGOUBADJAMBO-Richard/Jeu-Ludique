@@ -9,6 +9,7 @@ import {
   getEndResultText,
   getPlannedQuestionCount,
   getSelectedDifficulty,
+  getSelectedTheme,
   normalizeName,
   normalizeSecondName,
   t,
@@ -55,6 +56,7 @@ function resetRoundState() {
 
 function applyDifficultySettings() {
   const level = getSelectedDifficulty(refs.difficultyLevelInput.value);
+  state.questionTheme = getSelectedTheme(refs.questionThemeInput.value);
   const meta = getDifficultyMeta(state, level);
   state.difficultyLevel = level;
   state.timePerQuestion = clampTime(meta.seconds);
@@ -214,6 +216,12 @@ refs.difficultyLevelInput.addEventListener("change", () => {
   refreshSetupStateIfIdle();
 });
 
+refs.questionThemeInput.addEventListener("change", () => {
+  state.questionTheme = getSelectedTheme(refs.questionThemeInput.value);
+  refs.questionThemeInput.value = state.questionTheme;
+  refreshSetupStateIfIdle();
+});
+
 refs.questionCountModeInput.addEventListener("change", () => {
   state.questionCountMode =
     refs.questionCountModeInput.value === "custom" ? "custom" : "auto";
@@ -249,6 +257,7 @@ state.language = localStorage.getItem("quizLanguage") === "en" ? "en" : "fr";
 refs.languageSelect.value = state.language;
 state.questionCountMode =
   refs.questionCountModeInput.value === "custom" ? "custom" : "auto";
+state.questionTheme = getSelectedTheme(refs.questionThemeInput.value);
 state.customQuestionCount = Number(refs.customQuestionCountInput.value) || 10;
 refs.customQuestionCountInput.disabled = state.questionCountMode !== "custom";
 applyTheme(localStorage.getItem("quizTheme") || "light");

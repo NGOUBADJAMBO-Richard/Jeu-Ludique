@@ -1,6 +1,6 @@
 # Mini-Jeu-Web
 
-Mini-jeu de quiz (Bible + culture generale) realise en HTML/CSS/JavaScript natif, sans framework.
+Mini-jeu de quiz de culture generale realise en HTML/CSS/JavaScript natif, sans framework.
 Le jeu fonctionne 100% en local dans le navigateur.
 
 ## Apercu
@@ -9,7 +9,9 @@ Le jeu fonctionne 100% en local dans le navigateur.
 - Themes clair/sombre avec preference sauvegardee.
 - Mode 1 joueur et mode 2 joueurs local (alternance des tours).
 - Difficulte configurable (easy/medium/hard) avec temps par question adapte.
-- Questions melangees a chaque partie.
+- Banque de 1000 questions par langue, melangees a chaque partie.
+- Themes de questions: geographie, histoire, sciences, arts, sports, bible, technologie, institutions/citoyennete.
+- Filtre de theme dans l'interface (ou mode Tous).
 - Option de nombre de questions automatique (selon pool) ou personnalise (10/20/30).
 
 ## Fonctionnalites principales
@@ -74,7 +76,7 @@ Ou avec le script PowerShell fourni:
 
 Les tests verifient notamment:
 
-- la presence et la coherence des pools de questions (100 FR + 100 EN),
+- la presence et la coherence des pools de questions (1000 FR + 1000 EN),
 - les fonctions utilitaires de normalisation,
 - les regles de temps,
 - les transitions d'etat autorisees,

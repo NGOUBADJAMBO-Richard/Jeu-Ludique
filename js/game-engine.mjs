@@ -3,6 +3,7 @@ import {
   DIFFICULTY_CONFIG,
   GameState,
   I18N,
+  THEME_OPTIONS,
   questionPoolsByLanguage,
   shuffleQuestions,
 } from "./quiz-data.mjs";
@@ -30,8 +31,27 @@ export function getActiveQuestionPools(state) {
   return questionPoolsByLanguage[state.language] || questionPoolsByLanguage.fr;
 }
 
+export function getSelectedTheme(value) {
+  return THEME_OPTIONS.includes(value) ? value : "all";
+}
+
+export function getQuestionsForDifficulty(
+  state,
+  level = state.difficultyLevel,
+) {
+  const levelPool = getActiveQuestionPools(state)[level];
+  if (state.questionTheme === "all") {
+    return levelPool;
+  }
+
+  const filtered = levelPool.filter(
+    (question) => question.theme === state.questionTheme,
+  );
+  return filtered.length > 0 ? filtered : levelPool;
+}
+
 export function getPlannedQuestionCount(state, level = state.difficultyLevel) {
-  const poolCount = getActiveQuestionPools(state)[level].length;
+  const poolCount = getQuestionsForDifficulty(state, level).length;
   if (state.questionCountMode === "custom") {
     return Math.min(state.customQuestionCount, poolCount);
   }
@@ -55,14 +75,12 @@ export function getSelectedDifficulty(value) {
 
 export function getDifficultyMeta(state, level) {
   const config = DIFFICULTY_CONFIG[level];
-  const count = getActiveQuestionPools(state)[level].length;
+  const count = getQuestionsForDifficulty(state, level).length;
   return { ...config, count };
 }
 
 export function buildQuestionSet(state) {
-  const pool = shuffleQuestions(
-    getActiveQuestionPools(state)[state.difficultyLevel],
-  );
+  const pool = shuffleQuestions(getQuestionsForDifficulty(state));
   state.plannedQuestionCount = getPlannedQuestionCount(
     state,
     state.difficultyLevel,
@@ -121,5 +139,6 @@ export {
   CUSTOM_QUESTION_COUNTS,
   DIFFICULTY_CONFIG,
   GameState,
+  THEME_OPTIONS,
   questionPoolsByLanguage,
 };

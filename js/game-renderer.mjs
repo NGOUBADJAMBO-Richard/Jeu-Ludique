@@ -87,6 +87,7 @@ export function createRenderer({
       refs.startBtn.disabled = false;
       refs.languageSelect.disabled = false;
       refs.difficultyLevelInput.disabled = false;
+      refs.questionThemeInput.disabled = false;
       refs.questionCountModeInput.disabled = false;
       refs.customQuestionCountInput.disabled =
         state.questionCountMode !== "custom";
@@ -101,6 +102,7 @@ export function createRenderer({
       refs.replayBtn.disabled = true;
       refs.languageSelect.disabled = true;
       refs.difficultyLevelInput.disabled = true;
+      refs.questionThemeInput.disabled = true;
       refs.questionCountModeInput.disabled = true;
       refs.customQuestionCountInput.disabled = true;
       renderQuestion();
@@ -116,6 +118,7 @@ export function createRenderer({
     refs.replayBtn.disabled = false;
     refs.languageSelect.disabled = false;
     refs.difficultyLevelInput.disabled = false;
+    refs.questionThemeInput.disabled = false;
     refs.questionCountModeInput.disabled = false;
     refs.customQuestionCountInput.disabled =
       state.questionCountMode !== "custom";
@@ -142,6 +145,7 @@ export function createRenderer({
     refs.playerTwoLabel.textContent = t("player2Label");
     refs.secondsPerQuestionLabel.textContent = t("secondsPerQuestion");
     refs.difficultyLevelSetupLabel.textContent = t("difficultyLabelSetup");
+    refs.questionThemeLabel.textContent = t("questionThemeLabel");
     refs.questionCountModeLabel.textContent = t("questionCountModeLabel");
     refs.customQuestionCountLabel.textContent = t("customQuestionCountLabel");
     refs.twoPlayerModeLabel.textContent = t("twoPlayerLabel");
@@ -169,6 +173,15 @@ export function createRenderer({
       DIFFICULTY_CONFIG.medium.label[state.language];
     refs.difficultyLevelInput.options[2].textContent =
       DIFFICULTY_CONFIG.hard.label[state.language];
+    refs.questionThemeInput.options[0].textContent = t("themeAll");
+    refs.questionThemeInput.options[1].textContent = t("themeGeography");
+    refs.questionThemeInput.options[2].textContent = t("themeHistory");
+    refs.questionThemeInput.options[3].textContent = t("themeScience");
+    refs.questionThemeInput.options[4].textContent = t("themeArts");
+    refs.questionThemeInput.options[5].textContent = t("themeSports");
+    refs.questionThemeInput.options[6].textContent = t("themeBible");
+    refs.questionThemeInput.options[7].textContent = t("themeTechnology");
+    refs.questionThemeInput.options[8].textContent = t("themeCivics");
     refs.questionCountModeInput.options[0].textContent = t("modeAuto");
     refs.questionCountModeInput.options[1].textContent = t("modeCustom");
     refs.playerNameInput.placeholder = "Ex: Ruth";

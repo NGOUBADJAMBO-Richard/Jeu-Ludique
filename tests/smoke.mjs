@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 
 import {
+  THEME_OPTIONS,
   GameState,
   questionPoolsByLanguage,
   totalQuestionsEn,
@@ -11,6 +12,8 @@ import {
   clampTime,
   getEndResultText,
   getPlannedQuestionCount,
+  getQuestionsForDifficulty,
+  getSelectedTheme,
   normalizeName,
   normalizeSecondName,
   t,
@@ -20,8 +23,8 @@ import { createInitialState } from "../js/game-state.mjs";
 function runSmokeTests() {
   const state = createInitialState();
 
-  assert.equal(totalQuestionsFr, 100, "FR question count should be 100");
-  assert.equal(totalQuestionsEn, 100, "EN question count should be 100");
+  assert.equal(totalQuestionsFr, 1000, "FR question count should be 1000");
+  assert.equal(totalQuestionsEn, 1000, "EN question count should be 1000");
   assert.ok(
     questionPoolsByLanguage.fr.easy.length > 0,
     "FR easy pool should exist",
@@ -30,6 +33,8 @@ function runSmokeTests() {
     questionPoolsByLanguage.en.hard.length > 0,
     "EN hard pool should exist",
   );
+  assert.ok(THEME_OPTIONS.includes("history"), "History theme should exist");
+  assert.ok(THEME_OPTIONS.includes("civics"), "Civics theme should exist");
 
   assert.equal(normalizeName("  "), "Invité");
   assert.equal(normalizeName("  Ruth  "), "Ruth");
@@ -43,11 +48,23 @@ function runSmokeTests() {
 
   state.questionCountMode = "auto";
   state.difficultyLevel = "easy";
+  state.questionTheme = "all";
   assert.equal(
     getPlannedQuestionCount(state),
     questionPoolsByLanguage.fr.easy.length,
     "Auto question mode should use full pool",
   );
+
+  state.questionTheme = "science";
+  const sciencePool = getQuestionsForDifficulty(state, "easy");
+  assert.ok(sciencePool.length > 0, "Science theme pool should be non-empty");
+  assert.ok(
+    sciencePool.every((question) => question.theme === "science"),
+    "Theme filtering should keep only selected theme",
+  );
+
+  assert.equal(getSelectedTheme("history"), "history");
+  assert.equal(getSelectedTheme("unknown"), "all");
 
   state.questionCountMode = "custom";
   state.customQuestionCount = 30;

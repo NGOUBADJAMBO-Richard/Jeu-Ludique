@@ -14,6 +14,7 @@ export function createInitialState() {
     answeredCurrentQuestion: false,
     timePerQuestion: 15,
     difficultyLevel: "easy",
+    questionTheme: "all",
     questionCountMode: "auto",
     customQuestionCount: 10,
     plannedQuestionCount: 0,
