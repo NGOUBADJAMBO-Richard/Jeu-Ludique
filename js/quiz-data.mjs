@@ -1449,8 +1449,14 @@ function buildPromptAnswerStatementChoices({
   return rotateChoices([`${prompt} -> ${answer}`, ...wrong], answerIndexSeed);
 }
 
-function buildCountryCapitalPairChoices({ facts, currentIndex, lang, answerIndexSeed }) {
-  const country = lang === "fr" ? facts[currentIndex].fr : facts[currentIndex].en;
+function buildCountryCapitalPairChoices({
+  facts,
+  currentIndex,
+  lang,
+  answerIndexSeed,
+}) {
+  const country =
+    lang === "fr" ? facts[currentIndex].fr : facts[currentIndex].en;
   const right = `${country} - ${facts[currentIndex].capital}`;
 
   const wrongIndices = pickDistinctIndices(
@@ -1459,7 +1465,9 @@ function buildCountryCapitalPairChoices({ facts, currentIndex, lang, answerIndex
     currentIndex + 37,
     3,
   );
-  const wrong = wrongIndices.map((index) => `${country} - ${facts[index].capital}`);
+  const wrong = wrongIndices.map(
+    (index) => `${country} - ${facts[index].capital}`,
+  );
 
   return rotateChoices([right, ...wrong], answerIndexSeed);
 }
