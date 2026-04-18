@@ -74,6 +74,13 @@ function runSmokeTests() {
     "Custom question count should apply",
   );
 
+  state.customQuestionCount = 12;
+  assert.equal(
+    getPlannedQuestionCount(state),
+    20,
+    "Custom question count should enforce minimum of 20",
+  );
+
   state.language = "fr";
   assert.equal(t(state, "stateStart"), "Debut");
   state.language = "en";

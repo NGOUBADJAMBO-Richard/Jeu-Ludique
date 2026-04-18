@@ -179,15 +179,16 @@
             <label for="customQuestionCount" id="customQuestionCountLabel"
               >Nombre personnalisé</label
             >
-            <select
+            <input
+              type="number"
               id="customQuestionCount"
               name="customQuestionCount"
+              min="20"
+              max="1000"
+              step="1"
+              value="20"
               disabled
-            >
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-            </select>
+            />
           </div>
           <div class="mode-toggle">
             <input type="checkbox" id="twoPlayerMode" name="twoPlayerMode" />

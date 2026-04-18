@@ -5,6 +5,7 @@ export const GameState = Object.freeze({
 });
 
 const CUSTOM_QUESTION_COUNTS = Object.freeze([10, 20, 30]);
+const MIN_QUESTIONS_PER_GAME = 20;
 
 const THEME_OPTIONS = Object.freeze([
   "all",
@@ -1703,6 +1704,7 @@ export {
   CUSTOM_QUESTION_COUNTS,
   DIFFICULTY_CONFIG,
   I18N,
+  MIN_QUESTIONS_PER_GAME,
   THEME_OPTIONS,
   questionPoolsByLanguage,
   shuffleQuestions,

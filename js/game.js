@@ -1,17 +1,19 @@
 import { getDomRefs } from "./game-dom.mjs";
 import {
-  CUSTOM_QUESTION_COUNTS,
   GameState,
+  MIN_QUESTIONS_PER_GAME,
   assertStateTransition,
   buildQuestionSet,
   clampTime,
   getDifficultyMeta,
   getEndResultText,
   getPlannedQuestionCount,
+  getQuestionsForDifficulty,
   getSelectedDifficulty,
   getSelectedTheme,
   normalizeName,
   normalizeSecondName,
+  sanitizeCustomQuestionCount,
   t,
 } from "./game-engine.mjs";
 import { createRenderer } from "./game-renderer.mjs";
@@ -230,10 +232,11 @@ refs.questionCountModeInput.addEventListener("change", () => {
 });
 
 refs.customQuestionCountInput.addEventListener("change", () => {
-  const nextValue = Number(refs.customQuestionCountInput.value);
-  state.customQuestionCount = CUSTOM_QUESTION_COUNTS.includes(nextValue)
-    ? nextValue
-    : 10;
+  const poolCount = getQuestionsForDifficulty(state).length;
+  state.customQuestionCount = sanitizeCustomQuestionCount(
+    refs.customQuestionCountInput.value,
+    poolCount,
+  );
   refs.customQuestionCountInput.value = String(state.customQuestionCount);
   refreshSetupStateIfIdle();
 });
@@ -258,7 +261,12 @@ refs.languageSelect.value = state.language;
 state.questionCountMode =
   refs.questionCountModeInput.value === "custom" ? "custom" : "auto";
 state.questionTheme = getSelectedTheme(refs.questionThemeInput.value);
-state.customQuestionCount = Number(refs.customQuestionCountInput.value) || 10;
+state.customQuestionCount = sanitizeCustomQuestionCount(
+  refs.customQuestionCountInput.value || MIN_QUESTIONS_PER_GAME,
+  getQuestionsForDifficulty(state).length,
+);
+refs.customQuestionCountInput.min = String(MIN_QUESTIONS_PER_GAME);
+refs.customQuestionCountInput.value = String(state.customQuestionCount);
 refs.customQuestionCountInput.disabled = state.questionCountMode !== "custom";
 applyTheme(localStorage.getItem("quizTheme") || "light");
 applyLanguage();

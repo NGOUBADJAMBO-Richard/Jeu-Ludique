@@ -3,6 +3,7 @@ import {
   DIFFICULTY_CONFIG,
   GameState,
   I18N,
+  MIN_QUESTIONS_PER_GAME,
   THEME_OPTIONS,
   questionPoolsByLanguage,
   shuffleQuestions,
@@ -47,13 +48,23 @@ export function getQuestionsForDifficulty(
   const filtered = levelPool.filter(
     (question) => question.theme === state.questionTheme,
   );
-  return filtered.length > 0 ? filtered : levelPool;
+  return filtered.length >= MIN_QUESTIONS_PER_GAME ? filtered : levelPool;
+}
+
+export function sanitizeCustomQuestionCount(value, poolCount) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return Math.min(MIN_QUESTIONS_PER_GAME, poolCount);
+  }
+
+  const rounded = Math.floor(numeric);
+  return Math.min(poolCount, Math.max(MIN_QUESTIONS_PER_GAME, rounded));
 }
 
 export function getPlannedQuestionCount(state, level = state.difficultyLevel) {
   const poolCount = getQuestionsForDifficulty(state, level).length;
   if (state.questionCountMode === "custom") {
-    return Math.min(state.customQuestionCount, poolCount);
+    return sanitizeCustomQuestionCount(state.customQuestionCount, poolCount);
   }
   return poolCount;
 }
@@ -139,6 +150,7 @@ export {
   CUSTOM_QUESTION_COUNTS,
   DIFFICULTY_CONFIG,
   GameState,
+  MIN_QUESTIONS_PER_GAME,
   THEME_OPTIONS,
   questionPoolsByLanguage,
 };

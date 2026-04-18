@@ -16,7 +16,7 @@ export function createInitialState() {
     difficultyLevel: "easy",
     questionTheme: "all",
     questionCountMode: "auto",
-    customQuestionCount: 10,
+    customQuestionCount: 20,
     plannedQuestionCount: 0,
     language: "fr",
     theme: "light",

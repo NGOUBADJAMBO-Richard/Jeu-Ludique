@@ -12,7 +12,7 @@ Le jeu fonctionne 100% en local dans le navigateur.
 - Banque de 1000 questions par langue, melangees a chaque partie.
 - Themes de questions: geographie, histoire, sciences, arts, sports, bible, technologie, institutions/citoyennete.
 - Filtre de theme dans l'interface (ou mode Tous).
-- Option de nombre de questions automatique (selon pool) ou personnalise (10/20/30).
+- Option de nombre de questions automatique (selon pool) ou personnalise (valeur libre, minimum 20).
 
 ## Fonctionnalites principales
 
@@ -89,7 +89,7 @@ Les tests verifient notamment:
 - hard: 9s/question
 
 En mode automatique, le nombre de questions suit la taille du pool de difficulte.
-En mode personnalise, la valeur est limitee au pool disponible.
+En mode personnalise, la valeur est libre avec un minimum de 20 et est limitee au pool disponible.
 
 ## Roadmap (suggestions)
 
