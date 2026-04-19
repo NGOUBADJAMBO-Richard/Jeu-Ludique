@@ -66,7 +66,7 @@ export function getPlannedQuestionCount(state, level = state.difficultyLevel) {
   if (state.questionCountMode === "custom") {
     return sanitizeCustomQuestionCount(state.customQuestionCount, poolCount);
   }
-  return poolCount;
+  return Math.min(poolCount, MIN_QUESTIONS_PER_GAME);
 }
 
 export function clampTime(value) {
